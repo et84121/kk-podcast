@@ -10,7 +10,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
-    "types": ["vite/client", "node", "@intlify/vite-plugin-vue-i18n/client"],
+    "types": ["vite/client", "node"],
     "incremental": false,
     "skipLibCheck": true,
     "noUnusedLocals": true,
@@ -21,6 +21,13 @@
       "/@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "components.d.ts",
+    "auto-imports.d.ts"
+  ],
   "exclude": ["dist", "node_modules"]
 }
