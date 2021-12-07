@@ -13,7 +13,7 @@
     "types": ["vite/client", "node"],
     "incremental": false,
     "skipLibCheck": true,
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "strictNullChecks": true,
     "forceConsistentCasingInFileNames": true,
     "declaration": true,
