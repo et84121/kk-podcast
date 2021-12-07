@@ -3,6 +3,7 @@ import path from 'path';
 import vue from '@vitejs/plugin-vue';
 import WindiCSS from 'vite-plugin-windicss';
 import Components from 'unplugin-vue-components/vite';
+import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import PurgeIcons from 'vite-plugin-purge-icons';
 import ViteFonts from 'vite-plugin-fonts';
 import svgLoader from 'vite-svg-loader';
@@ -22,8 +23,9 @@ export default defineConfig({
     vue(),
     // https://github.com/jpkleemans/vite-svg-loader
     svgLoader(),
-    // https://github.com/antfu/vite-plugin-components
+    // https://github.com/antfu/unplugin-vue-components
     Components({
+      resolvers: [NaiveUiResolver()],
       dts: true,
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
       dirs: ['src/components', 'src/pages/common'],

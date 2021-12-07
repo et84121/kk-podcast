@@ -10,6 +10,7 @@
     "test": "jest --coverage"
   },
   "dependencies": {
+    "naive-ui": "^2.21.5",
     "pinia": "^2.0.6",
     "vue": "^3.2.21",
     "vue-router": "^4.0.11"
