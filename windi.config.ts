@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [typography()],
   theme: {
     fontFamily: {
-      sans: ['Open Sans', 'ui-sans-serif', 'system-ui'],
+      sans: ['Noto Sans TC', 'Open Sans', 'ui-sans-serif', 'system-ui'],
       serif: ['Montserrat', 'ui-serif', 'Georgia'],
       mono: ['Fira Sans', 'ui-monospace', 'SFMono-Regular'],
     },

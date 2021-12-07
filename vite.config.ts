@@ -2,11 +2,11 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import vue from '@vitejs/plugin-vue';
 import WindiCSS from 'vite-plugin-windicss';
-import VueI18n from '@intlify/vite-plugin-vue-i18n';
-import ViteComponents from 'vite-plugin-components';
+import Components from 'unplugin-vue-components/vite';
 import PurgeIcons from 'vite-plugin-purge-icons';
 import ViteFonts from 'vite-plugin-fonts';
 import svgLoader from 'vite-svg-loader';
+import AutoImport from 'unplugin-auto-import/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -23,29 +23,34 @@ export default defineConfig({
     // https://github.com/jpkleemans/vite-svg-loader
     svgLoader(),
     // https://github.com/antfu/vite-plugin-components
-    ViteComponents({
+    Components({
+      dts: true,
+      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+      dirs: ['src/components', 'src/pages/common'],
       extensions: ['vue'],
     }),
-    // vhttps://github.com/stafyniaksacha/vite-plugin-fonts#readme
+    // https://github.com/stafyniaksacha/vite-plugin-fonts#readme
     ViteFonts({
       google: {
-        families: ['Open Sans', 'Montserrat', 'Fira Sans'],
+        families: ['Noto Sans TC', 'Open Sans', 'Montserrat', 'Fira Sans'],
       },
+    }),
+    // https://github.com/antfu/unplugin-auto-import
+    AutoImport({
+      include: [
+        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+        /\.vue$/,
+        /\.vue\?vue/, // .vue
+      ],
+      imports: ['vue', 'vue-router'],
     }),
 
     // https://github.com/antfu/vite-plugin-windicss
-    WindiCSS({
-      safelist: 'prose prose-sm m-auto text-left',
-    }),
+    WindiCSS({}),
 
     // https://github.com/antfu/purge-icons/tree/main/packages/vite-plugin-purge-icons
     PurgeIcons({
       /* PurgeIcons Options */
-    }),
-
-    // https://github.com/intlify/vite-plugin-vue-i18n
-    VueI18n({
-      include: [path.resolve(__dirname, './locales/**')],
     }),
   ],
 });
