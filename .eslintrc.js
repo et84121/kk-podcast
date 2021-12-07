@@ -23,7 +23,8 @@ module.exports = {
     // Enable vue/script-setup-uses-vars rule
     'vue/script-setup-uses-vars': 'error',
     '@typescript-eslint/no-unused-vars': ['off'],
-    // 'no-undef': ['off'],
+    // 因為 auto import 的原故會誤報
+    'no-undef': ['off'],
     '@typescript-eslint/consistent-type-imports': [
       'error',
       { prefer: 'type-imports' },
