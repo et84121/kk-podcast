@@ -7,7 +7,6 @@ import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
 import PurgeIcons from 'vite-plugin-purge-icons';
 import ViteFonts from 'vite-plugin-fonts';
 import svgLoader from 'vite-svg-loader';
-import AutoImport from 'unplugin-auto-import/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -36,15 +35,6 @@ export default defineConfig({
       google: {
         families: ['Noto Sans TC', 'Open Sans', 'Montserrat', 'Fira Sans'],
       },
-    }),
-    // https://github.com/antfu/unplugin-auto-import
-    AutoImport({
-      include: [
-        /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-        /\.vue$/,
-        /\.vue\?vue/, // .vue
-      ],
-      imports: ['vue', 'vue-router'],
     }),
 
     // https://github.com/antfu/vite-plugin-windicss
