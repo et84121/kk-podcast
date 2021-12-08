@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 type Routes = Parameters<typeof createRouter>['0']['routes'];
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     name: 'home',
     path: '/',
