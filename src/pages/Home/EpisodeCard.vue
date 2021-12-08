@@ -10,6 +10,7 @@
       shadow-md
       hover:shadow-lg
     "
+    data-test="episode-card"
     @click="router.push({ name: 'episode' })"
   >
     <!-- ep. image -->
@@ -40,5 +41,6 @@
 </template>
 
 <script lang="ts" setup>
+import { useRouter } from 'vue-router';
 const router = useRouter();
 </script>
