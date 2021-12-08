@@ -19,13 +19,19 @@
       min="0"
       max="100"
       step="any"
+      data-test="soundplayer-time-controller"
     />
 
-    <button class="rounded-full border border-black border-4 w-10 h-10">
+    <button
+      class="rounded-full border border-black border-4 w-10 h-10"
+      data-test="soundplayer-state-controller"
+    >
       II
     </button>
 
-    <p class="text-lg">Now Playing... Ep. Name</p>
+    <p class="text-lg" data-test="soundplayer-state-info">
+      Now Playing... Ep. Name
+    </p>
   </div>
 </template>
 

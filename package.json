@@ -7,7 +7,7 @@
     "build": "vue-tsc --noEmit && vite build",
     "serve": "vite preview",
     "prepare": "husky install",
-    "test": "jest --coverage"
+    "test": "jest"
   },
   "dependencies": {
     "naive-ui": "^2.21.5",
@@ -16,14 +16,19 @@
     "vue-router": "^4.0.11"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.0",
     "@iconify/iconify": "^2.1.0",
     "@iconify/json": "^1.1.426",
+    "@types/jest": "^27.0.3",
     "@types/node": "^16.11.7",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
     "@vitejs/plugin-vue": "^1.6.0",
-    "@vue/compiler-sfc": "^3.2.21",
+    "@vue/compiler-sfc": "^3.2.24",
+    "@vue/test-utils": "^2.0.0-rc.17",
+    "@vue/vue3-jest": "^27.0.0-alpha.4",
     "@vueuse/core": "^6.8.0",
+    "babel-jest": "^27.4.2",
     "eslint": "^8.4.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-vue": "^8.2.0",
@@ -31,13 +36,13 @@
     "jest": "^27.4.3",
     "ts-jest": "^27.1.0",
     "typescript": "^4.4.4",
-    "unplugin-auto-import": "^0.5.1",
     "unplugin-vue-components": "^0.17.6",
     "vite": "^2.6.14",
     "vite-plugin-fonts": "^0.2.2",
     "vite-plugin-purge-icons": "^0.7.0",
     "vite-plugin-windicss": "^1.5.1",
     "vite-svg-loader": "^3.1.0",
+    "vue-router-mock": "^0.1.2",
     "vue-tsc": "^0.29.4",
     "windicss": "^3.2.1",
     "windicss-analysis": "^0.3.5"

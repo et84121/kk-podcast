@@ -10,6 +10,7 @@
       shadow-md
       hover:shadow-lg
     "
+    data-test="episode-card"
     @click="router.push({ name: 'episode' })"
   >
     <!-- ep. image -->

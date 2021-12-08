@@ -14,13 +14,17 @@
             border-2 border-gray-300 border-dashed
             rounded-lg
           "
+          data-test="episode-image"
         >
           <img />
           <p>沒有圖片</p>
         </div>
 
         <!-- ep meta info -->
-        <div class="flex flex-col justify-end items-start">
+        <div
+          class="flex flex-col justify-end items-start"
+          data-test="episode-meta"
+        >
           <h2
             class="
               my-2
@@ -38,7 +42,12 @@
 
       <!-- ep. play button -->
       <div class="flex flex-col justify-end">
-        <button class="border border-gray-500 py-2 px-4">play</button>
+        <button
+          class="border border-gray-500 py-2 px-4"
+          data-test="episode-play"
+        >
+          play
+        </button>
       </div>
     </div>
 
