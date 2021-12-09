@@ -19,7 +19,7 @@
       min="0"
       max="100"
       step="any"
-      data-test="soundplayer-time-controller"
+      data-test="soundplayer-seek-bar"
     />
 
     <button
