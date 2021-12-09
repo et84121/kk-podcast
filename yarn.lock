@@ -1054,18 +1054,18 @@
     source-map "0.5.6"
     tsconfig "^7.0.0"
 
-"@vueuse/core@^6.8.0":
-  version "6.9.2"
-  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-6.9.2.tgz#76b16d01f33cf367dd1a2d7f2e31d106443ceb8a"
-  integrity sha512-FRwl4ccSFuHZBHLGgS9TMv/+Dd6XFaL4o9nph2qtgQIV+z29RBFokw08XjHfykiENRzB01MjYHJ7iRUnsIFQXg==
+"@vueuse/core@^7.2.2":
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/core/-/core-7.2.2.tgz#8e563766cfeeef12f4c7d07307348a2c10be9875"
+  integrity sha512-T9oksrPflNhsgG/Y/7IeCSmITPZ0VKDnTpK8y7SQl4ZIdLIL8L7fJyhJEgSMWyo497j/XK3RKFkOTh4GFTVeIQ==
   dependencies:
-    "@vueuse/shared" "6.9.2"
+    "@vueuse/shared" "7.2.2"
     vue-demi "*"
 
-"@vueuse/shared@6.9.2":
-  version "6.9.2"
-  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-6.9.2.tgz#97e4369fa7262ebc96fe1d6e210268f30b037005"
-  integrity sha512-lAiMh6XROs0kSKVd0Yb/6GKoQMxC1fYrFDi6opvQWISPtcqRNluRrQxLUZ3WTI78ovtoKRLktjhkFAtydcfFDg==
+"@vueuse/shared@7.2.2":
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/@vueuse/shared/-/shared-7.2.2.tgz#12f2698d3b6470843823ae478bd8db42f05145c7"
+  integrity sha512-9vevEvvQgx4snSrDfZ5BFd7FmlIl9rwTtr8ySzPZhZQslx6lbcsXK3Q97I06Fv8S2TedR//X9fn2QbNtbFmdog==
   dependencies:
     vue-demi "*"
 
@@ -4431,6 +4431,11 @@ type-fest@^0.21.3:
   version "0.21.3"
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-0.21.3.tgz#d260a24b0198436e133fa26a524a6d65fa3b2e37"
   integrity sha512-t0rzBq87m3fVcduHDUFhKmyyX+9eo6WQjZvf51Ea/M0Q7+T374Jp1aUiyUl0GKxp8M/OETVHSDvmkyPgvX+X2w==
+
+type-fest@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.8.0.tgz#39d7c9f9c508df8d6ce1cf5a966b0e6568dcc50d"
+  integrity sha512-O+V9pAshf9C6loGaH0idwsmugI2LxVNR7DtS40gVo2EXZVYFgz9OuNtOhgHLdHdapOEWNdvz9Ob/eeuaWwwlxA==
 
 typedarray-to-buffer@^3.1.5:
   version "3.1.5"
