@@ -7,11 +7,11 @@ describe('ChannelIntro.vue', () => {
   it('when pass normal props, should have all element. [image,title,author,link,description]', async () => {
     type Props = Simplify<InstanceType<typeof ChannelIntroVue>['$props']>;
 
-    function propsFactory<P extends Props>(o: P) {
+    function propsConstructer<P extends Props>(o: P) {
       return o;
     }
 
-    const props = propsFactory({
+    const props = propsConstructer({
       value: {
         author: 'test-author',
         image: {
