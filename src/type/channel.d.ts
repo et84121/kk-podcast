@@ -35,7 +35,7 @@ interface Episode {
   content: string;
   contentSnippet: string;
   guid: string;
-  isoDate: Date;
+  isoDate: string;
   itunes: Itunes;
 }
 
