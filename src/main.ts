@@ -11,12 +11,15 @@ import { Router } from '/@/router';
 import 'virtual:windi.css';
 import 'virtual:windi-devtools';
 
-//pinia
+// pinia
 import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
-//podcastPlayer
+// podcastPlayer
 import { podcastPlayer } from '/@/plugin/PodcastPlayer';
+
+// vue-use motion
+import { MotionPlugin } from '@vueuse/motion';
 
 const app = createApp(App);
 
@@ -25,5 +28,7 @@ app.use(createPinia().use(piniaPluginPersistedstate));
 app.use(Router);
 
 app.use(podcastPlayer);
+
+app.use(MotionPlugin);
 
 app.mount('#app');
