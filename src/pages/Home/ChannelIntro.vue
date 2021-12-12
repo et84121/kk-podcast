@@ -3,7 +3,8 @@
     <!-- channel image -->
     <div
       class="
-        lg:w-2/5
+        lg:(w-2/5
+        min-h-100)
         flex flex-row
         justify-center
         items-center

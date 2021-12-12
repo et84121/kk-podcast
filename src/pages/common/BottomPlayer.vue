@@ -19,12 +19,12 @@
   >
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range -->
     <div class="absolute -top-2 right-0 left-0 w-full flex flex-row">
-      <p class="mx-2 whitespace-nowrap">
+      <p class="mx-2 whitespace-nowrap w-15 text-center">
         {{
           formatDuration(
             { minutes: 0, seconds: Math.round(currentTime) },
             { locale: zhTW },
-          )
+          ) || '0'
         }}
       </p>
       <input
@@ -36,13 +36,13 @@
         step="any"
         data-test="soundplayer-seek-bar"
       />
-      <p class="mx-2">{{ Math.round(duration) }}</p>
+      <p class="mx-2 w-15 text-center">{{ Math.round(duration) }}</p>
     </div>
 
     <button
       v-if="status.playing"
       class="playerButton"
-      data-test="soundplayer-state-controller"
+      data-test="soundplayer-controller-pause"
       :disabled="!playable"
       @click="pause()"
     >
@@ -52,7 +52,7 @@
     <button
       v-else
       class="playerButton"
-      data-test="soundplayer-state-controller"
+      data-test="soundplayer-controller-play"
       :disabled="!playable"
       @click="play()"
     >
@@ -83,7 +83,7 @@ import { formatDuration } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
 
 const props = withDefaults(defineProps<{ visbility?: boolean }>(), {
-  visbility: false,
+  visbility: true,
 });
 
 const emit = defineEmits<{ (e: 'update:visbility', value: boolean): void }>();
@@ -107,6 +107,7 @@ watch(
   playable,
   newVal => {
     if (newVal) visbility.value = true;
+    else visbility.value = false;
   },
   { immediate: true },
 );

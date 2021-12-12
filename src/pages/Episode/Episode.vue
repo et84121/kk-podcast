@@ -7,7 +7,8 @@
         <div
           class="
             w-3/5
-            lg:w-2/5
+            lg:(w-2/5
+            min-h-100)
             flex flex-row
             justify-center
             items-center
@@ -35,7 +36,7 @@
           >
             {{ episode?.title }}
           </h2>
-          <p class="text-sm">{{ episode?.pubDate }}</p>
+          <p class="text-sm">{{ formatPubDate }}</p>
           <p class="text-sm">{{ episode?.itunes.duration }}</p>
         </div>
       </div>
@@ -43,7 +44,18 @@
       <!-- ep. play button -->
       <div class="flex flex-col justify-end">
         <button
-          class="border border-gray-500 py-2 px-4"
+          v-motion-pop
+          class="
+            border-1 border-gray-200
+            pt-4
+            pb-4
+            px-6
+            rounded-3xl
+            text-5xl
+            shadow-md
+            hover:shadow-lg
+            active:shadow-sm
+          "
           data-test="episode-play"
           @click="podcastPlayer.play(episode?.guid)"
         >
@@ -64,6 +76,8 @@
 import { computed, toRef } from 'vue';
 import { usePodcastPlayer } from '/@/plugin/PodcastPlayer';
 import { usePodcastChannelStore } from '/@/store/podcastChannelStore';
+import { format } from 'date-fns';
+import { zhTW } from 'date-fns/locale';
 
 const props = defineProps<{ guid: string }>();
 
@@ -75,5 +89,15 @@ const episode = computed(() => {
   return podcastChannelStore.channel?.items.find(
     e => e.guid == toRef(props, 'guid').value,
   );
+});
+
+const formatPubDate = computed(() => {
+  if (episode.value) {
+    return format(new Date(episode.value?.pubDate), 'yyy年MM月d日', {
+      locale: zhTW,
+    });
+  } else {
+    return '';
+  }
 });
 </script>
