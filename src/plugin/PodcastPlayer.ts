@@ -1,5 +1,6 @@
-import type { createApp, InjectionKey, Ref } from 'vue';
-import { inject, ref, readonly, watch, reactive, toRef } from 'vue';
+import type { createApp, InjectionKey } from 'vue';
+import { Ref, toRaw } from 'vue';
+import { inject, ref, readonly, watch, reactive, toRef, nextTick } from 'vue';
 import { useMediaControls } from '@vueuse/core';
 import { usePodcastChannelStore } from '/@/store/podcastChannelStore';
 import type { PodcastChannel } from '../type/channel';
@@ -64,21 +65,28 @@ function initPodcastPlayer() {
 
   const episodeIndex = ref(0);
 
-  const audioElement = ref<HTMLAudioElement | undefined>(new Audio());
+  const audioElement = ref(new Audio());
 
-  let controls = useMediaControls(audioElement, {
-    src: episodes[episodeIndex.value].enclosure.url,
+  const controls = useMediaControls(audioElement);
+
+  const episodeGuid = ref<string | undefined>();
+
+  const episodeMeta = ref<EpisodeMeta | undefined>();
+
+  const autoNextEpisodeFlag = ref(true);
+
+  audioElement.value.addEventListener('canplaythrough', () => {
+    if (autoNextEpisodeFlag.value) {
+      audioElement.value.play();
+    }
   });
-  const episodeGuid = ref(episodes[episodeIndex.value].guid);
-
-  const episodeMeta = ref<EpisodeMeta>(episodes[episodeIndex.value]);
 
   watch(
     [episodeGuid, episodeIndex],
     ([newGuid, newIndex], [oldGuid, oldIndex]) => {
       let newEpisode: EpisodeMeta | undefined = undefined;
 
-      // when new ep. GUID set
+      // when new episode GUID set
       if (newGuid !== oldGuid) {
         const newEpisodeIndex = episodes.findIndex(e => e.guid === newGuid);
 
@@ -90,12 +98,12 @@ function initPodcastPlayer() {
         episodeIndex.value = newEpisodeIndex;
         newEpisode = episodes[newEpisodeIndex];
       }
-      // when new ep. Index set
+      // when new episode index set
       else if (newIndex !== oldIndex) {
         // new index inbound
         if (newIndex > 0 && newIndex < episodes.length) {
-          episodeIndex.value = newIndex;
           newEpisode = episodes[newIndex];
+
           episodeGuid.value = newEpisode.guid;
         }
         // new index outbound
@@ -116,30 +124,39 @@ function initPodcastPlayer() {
 
       const newEpisodeUrl = newEpisode.enclosure.url;
 
-      controls.playing.value;
-
-      audioElement.value = new Audio();
-
-      controls = useMediaControls(audioElement, { src: newEpisodeUrl });
+      audioElement.value.src = newEpisodeUrl;
     },
   );
 
-  const autoNextFlag = ref(false);
-
-  // when sound playing reach end, check autoNext flag to play or not play
-  watch(toRef(controls, 'ended'), (newVal, oldVal) => {
-    if (newVal && !oldVal && autoNextFlag) {
+  watch(controls.ended, (newVal, oldVal) => {
+    if (newVal && autoNextEpisodeFlag) {
       // play next ep.
       next();
+      controls.ended.value = false;
     }
   });
 
   const status = ref({
+    /**
+     * The playing event is fired after playback is first started, and whenever it is restarted. For example it is fired when playback resumes after having been paused or delayed due to lack of data.
+     */
     playing: controls.playing,
+    /**
+     * The ended event is fired when playback or streaming has stopped because the end of the media was reached or because no further data is available.
+     */
     ended: controls.ended,
+    /**
+     * The waiting event is fired when playback has stopped because of a temporary lack of data.
+     */
     waiting: controls.waiting,
-    // seeking: controls.seeking,
-    // stalled: controls.stalled,
+    /**
+     * The seeking event is fired when a seek operation starts, meaning the Boolean seeking attribute has changed to true and the media is seeking a new position.
+     */
+    seeking: controls.seeking,
+    /**
+     * The stalled event is fired when the user agent is trying to fetch media data, but data is unexpectedly not forthcoming.
+     */
+    stalled: controls.stalled,
   });
 
   controls.onSourceError(e => {
@@ -160,11 +177,10 @@ function initPodcastPlayer() {
    * @returns
    */
   function play(_episodeGuid?: string) {
-    if (!_episodeGuid) {
-      controls.playing.value = true;
-      return;
+    if (_episodeGuid) {
+      episodeGuid.value = _episodeGuid;
     }
-    episodeGuid.value = _episodeGuid;
+
     controls.playing.value = true;
   }
 
@@ -173,33 +189,69 @@ function initPodcastPlayer() {
   }
 
   function next() {
-    episodeIndex.value += 1;
+    const newIndex = episodeIndex.value + 1;
+
+    if (newIndex >= episodes.length || newIndex < 0) {
+      return;
+    }
+
+    episodeIndex.value = newIndex;
   }
 
   function previous() {
-    episodeIndex.value -= 1;
+    const newIndex = episodeIndex.value - 1;
+
+    if (newIndex >= episodes.length || newIndex < 0) {
+      return;
+    }
+
+    episodeIndex.value = newIndex;
   }
 
   return {
     /**
-     * 播放狀態
+     * Player status
      */
     status: readonly(status),
     /**
-     * 播放源 guid
+     * Episode GUID
      */
     EpisodeGuid: readonly(episodeGuid),
+    /**
+     * Current episode meta data
+     */
     EpisodeMeta: readonly(episodeMeta),
     /**
      * The time of current playback (in seconds).
      */
     currentTime: toRef(controls, 'currentTime'),
+    /**
+     * The duration of the current media (in seconds).
+     */
     duration: toRef(controls, 'duration'),
-    autoNextFlag,
+    /**
+     * auto continue to next episode
+     */
+    autoNextEpisodeFlag,
+    /**
+     * Stop the player
+     */
     stop,
+    /**
+     * Play the episode (with GUID)
+     */
     play,
+    /**
+     * Pause the audio
+     */
     pause,
+    /**
+     * Play next episode
+     */
     next,
+    /**
+     * Play previous episode
+     */
     previous,
   };
 }
