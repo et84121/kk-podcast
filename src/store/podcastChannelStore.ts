@@ -20,4 +20,5 @@ export const usePodcastChannelStore = defineStore('PodcastChannelStore', {
       this.channel = feed as unknown as PodcastChannel;
     },
   },
+  persist: true,
 });
