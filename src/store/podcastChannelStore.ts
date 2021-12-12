@@ -11,8 +11,7 @@ export const usePodcastChannelStore = defineStore('PodcastChannelStore', {
   }),
   actions: {
     async load() {
-      const url =
-        'https://api.soundon.fm/v2/podcasts/954689a5-3096-43a4-a80b-7810b219cef3/feed.xml';
+      const url = '/v2/podcasts/954689a5-3096-43a4-a80b-7810b219cef3/feed.xml';
 
       if (this.channel) {
         return;

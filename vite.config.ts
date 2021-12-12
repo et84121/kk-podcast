@@ -12,6 +12,14 @@ import svgLoader from 'vite-svg-loader';
 export default defineConfig({
   server: {
     port: 4000,
+    cors: true,
+    proxy: {
+      '/v2': {
+        target: 'https://api.soundon.fm',
+        secure: false,
+        changeOrigin: true,
+      },
+    },
   },
   resolve: {
     alias: {
