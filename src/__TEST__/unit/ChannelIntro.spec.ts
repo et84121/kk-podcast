@@ -1,28 +1,17 @@
 import { describe, expect, beforeEach, it, test } from '@jest/globals';
 import { mount } from '@vue/test-utils';
-import type { Simplify } from 'type-fest';
+import { podcastChannelFactory } from './mockDataFactory';
 import ChannelIntroVue from '/@/pages/Home/ChannelIntro.vue';
+import { useComponentMock } from '/@/util/utils';
 
 describe('ChannelIntro.vue', () => {
-  it('when pass normal props, should have all element. [image,title,author,link,description]', async () => {
-    type Props = Simplify<InstanceType<typeof ChannelIntroVue>['$props']>;
+  it('when pass normal props, should have all element. [image,title,author,description]', async () => {
+    const { propsConstructor } = useComponentMock<
+      InstanceType<typeof ChannelIntroVue>
+    >();
 
-    function propsConstructer<P extends Props>(o: P) {
-      return o;
-    }
-
-    const props = propsConstructer({
-      value: {
-        author: 'test-author',
-        image: {
-          link: 'test-image-link',
-          title: 'test-image-title',
-          url: 'test-image-url',
-        },
-        description: 'test-description',
-        title: 'test-title',
-        link: 'test-link',
-      },
+    const props = propsConstructor({
+      value: podcastChannelFactory.buildSync(),
     });
 
     const wrapper = mount(ChannelIntroVue, {
@@ -39,11 +28,7 @@ describe('ChannelIntro.vue', () => {
     );
 
     expect(wrapper.find("[data-test='channel-author']").text()).toBe(
-      props.value.author,
-    );
-
-    expect(wrapper.find("[data-test='channel-link']").attributes('href')).toBe(
-      props.value.link,
+      props.value.itunes.author,
     );
 
     expect(wrapper.find("[data-test='channel-description']").text()).toBe(
@@ -67,6 +52,6 @@ describe('ChannelIntro.vue', () => {
 
     expect(
       wrapper.find("[data-test='channel-description']").exists(),
-    ).toBeFalsy();
+    ).toBeTruthy();
   });
 });

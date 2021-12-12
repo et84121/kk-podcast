@@ -30,12 +30,11 @@
         {{ props.value?.itunes.author }}
       </p>
 
-      <div>
+      <div class="flex flex-col" data-test="channel-description">
         <p
           v-for="(p, index) in props.value?.description.split('\n')"
           :key="index"
           class=""
-          data-test="channel-description"
         >
           {{ p }}
         </p>
