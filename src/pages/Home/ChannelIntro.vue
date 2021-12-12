@@ -2,15 +2,7 @@
   <div class="flex flex-row flex-wrap justify-around gap-4">
     <!-- channel image -->
     <div
-      class="
-        lg:(w-2/5
-        min-h-100)
-        flex flex-row
-        justify-center
-        items-center
-        border-2 border-gray-300 border-dashed
-        rounded-lg
-      "
+      class="lg:(w-2/5 min-h-100) flex flex-row justify-center items-center rounded-lg shadow-lg"
     >
       <img
         v-if="props.value?.image"
@@ -25,11 +17,7 @@
     <!-- channel meta info -->
     <div class="flex flex-col justify-end items-start gap-2 py-2 lg:w-4/7">
       <h2
-        class="
-          text-5xl
-          font-bold
-          underline underline-blue-400 underline-offset-2 underline-4
-        "
+        class="text-5xl font-bold underline underline-blue-400 underline-offset-2 underline-4"
         data-test="channel-name"
       >
         {{ props.value?.title || '無名頻道' }}

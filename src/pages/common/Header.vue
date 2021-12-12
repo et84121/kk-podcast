@@ -5,7 +5,8 @@
       data-test="header"
       @click="router.push({ name: 'home' })"
     >
-      KK-Podcast
+      <span class="iconify" data-icon="twemoji:letter-k"></span>
+      Podcast
     </h1>
   </div>
 </template>

@@ -1,72 +1,67 @@
 <template>
   <div class="container mx-auto flex flex-col py-4 px-4">
     <!-- ep. header -->
-    <div class="flex flex-row flex-wrap gap-4 justify-between">
-      <div class="flex flex-row flex-warp gap-4 lg:w-5/6">
+    <div
+      class="flex flex-row flex-wrap gap-4 md:justify-between justify-center"
+    >
+      <div
+        v-motion-slide-bottom
+        class="flex flex-row flex-wrap justify-center gap-4 lg:(w-6/7 justify-start)"
+      >
         <!-- ep image -->
         <div
-          class="
-            w-3/5
-            lg:(w-2/5
-            min-h-100)
-            flex flex-row
-            justify-center
-            items-center
-            border-2 border-gray-300 border-dashed
-            rounded-lg
-          "
+          class="w-3/5 min-w-30 lg:(w-2/5 min-h-100) flex flex-row justify-center items-center shadow-lg rounded-lg"
           data-test="episode-image"
         >
-          <img v-if="episode?.itunes.image" :src="episode?.itunes.image" />
-          <p v-else>沒有圖片</p>
+          <router-link :to="{ name: 'home' }">
+            <img
+              v-if="episode?.itunes.image"
+              :src="episode?.itunes.image"
+              class="rounded-lg"
+            />
+            <p v-else>沒有圖片</p>
+          </router-link>
         </div>
 
         <!-- ep meta info -->
         <div
-          class="flex flex-col justify-end items-start"
+          class="flex flex-row flex-wrap justify-center items-end pb-4 gap-8"
           data-test="episode-meta"
         >
-          <h2
-            class="
-              my-2
-              text-2xl
-              font-bold
-              underline underline-blue-400 underline-offset-4 underline-4
-            "
+          <div class="flex flex-col">
+            <h2
+              class="my-2 text-4xl font-bold underline underline-blue-400 underline-offset-4 underline-4"
+            >
+              {{ episode?.title }}
+            </h2>
+            <p class="text-lg">{{ formatPubDate }}</p>
+            <p class="text-sm">{{ `共 ${episode?.itunes.duration} 秒` }}</p>
+          </div>
+          <button
+            class="border-1 border-gray-200 my-4 pt-4 pb-4 px-6 flex flex-row rounded-3xl text-5xl shadow-md hover:shadow-lg active:(shadow-sm ring-transparent)"
+            data-test="episode-play"
+            @click="podcastPlayer.play(episode?.guid)"
           >
-            {{ episode?.title }}
-          </h2>
-          <p class="text-sm">{{ formatPubDate }}</p>
-          <p class="text-sm">{{ episode?.itunes.duration }}</p>
+            <span class="iconify" data-icon="bi:play-fill"></span>
+            <p class="text-4xl">Play</p>
+          </button>
         </div>
       </div>
 
-      <!-- ep. play button -->
-      <div class="flex flex-col justify-end">
-        <button
-          v-motion-pop
-          class="
-            border-1 border-gray-200
-            pt-4
-            pb-4
-            px-6
-            rounded-3xl
-            text-5xl
-            shadow-md
-            hover:shadow-lg
-            active:shadow-sm
-          "
-          data-test="episode-play"
-          @click="podcastPlayer.play(episode?.guid)"
+      <!--  button -->
+      <div class="flex flex-col gap-4 justify-end">
+        <router-link
+          class="py-2 px-2 border-1 border-gray-200"
+          :to="{ name: 'home' }"
         >
-          Play
-        </button>
+          查看全部集數
+        </router-link>
       </div>
     </div>
 
     <!-- ep. description -->
-    <div class="flex flex-col">
-      <h2 class="text-4xl my-4">Episode Description</h2>
+    <div v-motion-slide-bottom class="flex flex-col">
+      <h2 class="text-4xl my-8">本集內容</h2>
       <div v-html="episode?.['content:encoded']"></div>
     </div>
   </div>
