@@ -3,8 +3,7 @@ import { Ref, toRaw } from 'vue';
 import { inject, ref, readonly, watch, reactive, toRef, nextTick } from 'vue';
 import { useMediaControls } from '@vueuse/core';
 import { usePodcastChannelStore } from '/@/store/podcastChannelStore';
-import type { PodcastChannel } from '../type/channel';
-import type { AsyncReturnType } from 'type-fest';
+import type { PodcastChannel } from '/@/model/channel';
 
 type Plugin = Parameters<ReturnType<typeof createApp>['use']>['0'];
 

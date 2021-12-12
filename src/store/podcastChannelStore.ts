@@ -1,11 +1,11 @@
 import { defineStore } from 'pinia';
 import { useRssParser } from '../composable/useRssParser';
-
-import type { PodcastChannel } from '/@/type/channel';
+import type { z } from 'zod';
+import { podcastChannelSchema } from '/@/model/channel';
 
 export const usePodcastChannelStore = defineStore('PodcastChannelStore', {
   state: (): {
-    channel?: PodcastChannel;
+    channel?: z.infer<typeof podcastChannelSchema>;
   } => ({
     channel: undefined,
   }),
@@ -19,7 +19,7 @@ export const usePodcastChannelStore = defineStore('PodcastChannelStore', {
 
       const feed = await useRssParser(url);
 
-      this.channel = feed;
+      this.channel = podcastChannelSchema.parse(feed);
     },
   },
   persist: true,

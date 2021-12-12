@@ -58,7 +58,7 @@
 
 <script setup lang="ts">
 import type { Except } from 'type-fest';
-import type { PodcastChannel } from '/@/type/channel';
+import type { PodcastChannel } from '/@/model/channel';
 
 type ChannelIntro = Except<PodcastChannel, 'items'>;
 
