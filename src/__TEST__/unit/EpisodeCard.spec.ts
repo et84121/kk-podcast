@@ -3,7 +3,7 @@ import { describe, expect, beforeEach, it } from '@jest/globals';
 import { mount } from '@vue/test-utils';
 import { routes } from '/@/router';
 import EpisodeCardVue from '/@/pages/Home/EpisodeCard.vue';
-import { useComponentMock } from '../../util/utils';
+import { useComponentMock } from '/@/util/utils';
 
 describe('Header.vue', () => {
   const router = createRouterMock({
@@ -20,20 +20,22 @@ describe('Header.vue', () => {
   });
 
   it('routing to episode page after clicking Card', async () => {
-    const { propsConstructor } =
-      useComponentMock<InstanceType<typeof EpisodeCardVue>>();
+    const { propsConstructor } = useComponentMock<
+      InstanceType<typeof EpisodeCardVue>
+    >();
 
     const props = propsConstructor({ value: { title: 'test', guid: 'eeee' } });
 
-    const wrapper = mount(EpisodeCardVue);
-    const headerElement = wrapper.get('[data-test="episode-card"]');
+    const wrapper = mount(EpisodeCardVue, { props });
+    const headerElement = wrapper.find('[data-test="episode-card"]');
+
+    expect(headerElement.exists()).toBe(true);
+
     await headerElement.trigger('click');
 
-    expect(wrapper.vm.$router.push).toHaveBeenCalledWith(
-      expect.objectContaining({
-        name: 'episode',
-        params: { guid: props.value.guid },
-      }),
-    );
+    expect(wrapper.vm.$router.push).toHaveBeenCalledWith({
+      name: 'episode',
+      params: { guid: props.value.guid },
+    });
   });
 });

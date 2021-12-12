@@ -51,6 +51,7 @@ const props = defineProps<{ value?: Episode }>();
 
 function routeToEpisodePage() {
   if (!props.value) {
+    console.error('no props value');
     return;
   }
 
