@@ -714,6 +714,13 @@
     widest-line "^3.1.0"
     wrap-ansi "^6.2.0"
 
+"@pinia/testing@^0.0.8":
+  version "0.0.8"
+  resolved "https://registry.yarnpkg.com/@pinia/testing/-/testing-0.0.8.tgz#77e9064019349dfe57a618606a5c7e0cae94542e"
+  integrity sha512-vNlxWRBPmp9t9pbbryKAI1ycSnrRVPvSxxpl8huJ0c0eLGVSCexD/r34iEx+uAelVaD+R22WPVCd9xb6L49J2w==
+  dependencies:
+    vue-demi "*"
+
 "@polka/url@^1.0.0-next.20":
   version "1.0.0-next.21"
   resolved "https://registry.yarnpkg.com/@polka/url/-/url-1.0.0-next.21.tgz#5de5a2385a35309427f6011992b544514d559aa1"
@@ -759,6 +766,11 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
+"@tool-belt/type-predicates@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@tool-belt/type-predicates/-/type-predicates-1.2.0.tgz#bc38cd34697c8664c59ce8a7188f7def3a22be23"
+  integrity sha512-08ow2MwCE8fx9VkWYHPmwFBPOkqGbeh3LRZCC0vzr1QECZpikMOOMTP/IQIE3nEBRQ9GNSs+A/ZRKym2mUvrAA==
+
 "@tootallnate/once@1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-1.1.2.tgz#ccb91445360179a04e7fe6aff78c00ffc1eeaf82"
@@ -801,6 +813,11 @@
   integrity sha512-K2waXdXBi2302XUdcHcR1jCeU0LL4TD9HRs/gk0N2Xvrht+G/BfJa4QObBQZfhMdxiCpV3COl5Nfq4uKTeTnJA==
   dependencies:
     "@babel/types" "^7.3.0"
+
+"@types/faker@^5.5.9":
+  version "5.5.9"
+  resolved "https://registry.yarnpkg.com/@types/faker/-/faker-5.5.9.tgz#588ede92186dc557bff8341d294335d50d255f0c"
+  integrity sha512-uCx6mP3UY5SIO14XlspxsGjgaemrxpssJI0Ol+GfhxtcKpv9pgRZYsS4eeKeHVLje6Qtc8lGszuBI461+gVZBA==
 
 "@types/graceful-fs@^4.1.2":
   version "4.1.5"
@@ -2485,6 +2502,11 @@ extract-from-css@^0.4.4:
   dependencies:
     css "^2.1.0"
 
+faker@^5.5.3:
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/faker/-/faker-5.5.3.tgz#c57974ee484431b25205c2c8dc09fda861e51e0e"
+  integrity sha512-wLTv2a28wjUyWkbnX7u/ABZBkUkIF2fCd73V6P2oFqEGEktDfzWx4UxrSqtPRw0xPRAcjeAOIiJWqZm3pP4u3g==
+
 fast-deep-equal@^3.1.1, fast-deep-equal@^3.1.3:
   version "3.1.3"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
@@ -2913,6 +2935,13 @@ inquirer@^8.2.0:
     string-width "^4.1.0"
     strip-ansi "^6.0.0"
     through "^2.3.6"
+
+interface-forge@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/interface-forge/-/interface-forge-1.4.5.tgz#d1d03fe445523f8040ff5bc860ceb1a35f9610ab"
+  integrity sha512-EuhnmtDCe908/1CaZH+yHxX0Kr2kYY0L2TSu3Bu/r64nrZaRO6ociMlKC0Z633WAUsLKTGbO9ANkn6StwK03mg==
+  dependencies:
+    "@tool-belt/type-predicates" "^1.2.0"
 
 is-binary-path@~2.1.0:
   version "2.1.0"
