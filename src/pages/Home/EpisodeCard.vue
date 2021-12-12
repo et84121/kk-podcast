@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="cardElement"
     class="
       flex flex-row flex-wrap
       gap-4
@@ -11,7 +12,7 @@
       hover:shadow-lg
     "
     data-test="episode-card"
-    @click="routeToEpisodePage()"
+    @click="routeToEpisodePage"
   >
     <!-- ep. image -->
     <div
@@ -26,27 +27,30 @@
       "
     >
       <img
-        v-if="props.value?.itunes"
-        class="w-25 h-25 object-center object-cover"
-        :scr="props.value.itunes.image"
+        v-if="props.value?.itunes?.image && imageLoadFlag"
+        class="object-center object-cover"
+        :src="imageLoadFlag && props.value.itunes.image"
       />
       <p v-else>沒有圖片</p>
     </div>
 
     <!-- ep. meta info -->
-    <div class="flex flex-col items-start justify-end">
-      <h2 class="text-lg font-bold">{{ props.value?.title }}</h2>
+    <div class="flex flex-col items-start justify-center">
+      <h2 class="text-2xl font-bold">{{ props.value?.title }}</h2>
       <p class="text-sm">{{ props.value?.isoDate }}</p>
-      <p class="text-sm">{{ props.value?.enclosure?.length }}</p>
-      <p class="text-sm">{{ props.value?.contentSnippet }}</p>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import type { PodcastChannel } from '/@/type/channel';
 import type { SetRequired } from 'type-fest';
+import { useLazyLoad } from '/@/composable/useLazyLoad';
+
+const cardElement = ref<Element>();
+
 const router = useRouter();
 
 type Episode = SetRequired<
@@ -63,4 +67,6 @@ function routeToEpisodePage() {
 
   router.push({ name: 'episode', params: { guid: props.value.guid } });
 }
+
+const imageLoadFlag = useLazyLoad(cardElement);
 </script>

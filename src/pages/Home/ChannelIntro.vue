@@ -1,10 +1,9 @@
 <template>
-  <div class="flex flex-row flex-wrap gap-4">
+  <div class="flex flex-row flex-wrap justify-around gap-4">
     <!-- channel image -->
     <div
       class="
-        w-50
-        h-50
+        lg:w-2/5
         flex flex-row
         justify-center
         items-center
@@ -14,19 +13,19 @@
     >
       <img
         v-if="props.value?.image"
-        :src="props.value.image.link"
+        :src="props.value.image.url"
         :alt="props.value.image.title"
-        class="object-center object-cover w-50 h-50"
+        class="object-center object-cover"
         data-test="channel-image"
       />
       <p v-else data-test="channel-image-fallback">沒有圖片</p>
     </div>
 
     <!-- channel meta info -->
-    <div class="flex flex-col justify-end items-start py-2">
+    <div class="flex flex-col justify-end items-start gap-2 py-2 lg:w-4/7">
       <h2
         class="
-          text-2xl
+          text-5xl
           font-bold
           underline underline-blue-400 underline-offset-2 underline-4
         "
@@ -34,34 +33,33 @@
       >
         {{ props.value?.title || '無名頻道' }}
       </h2>
-      <p v-if="props.value?.author" data-test="channel-author">
-        {{ props.value.author }}
-      </p>
-      <a
-        v-if="props.value?.link"
-        :href="props.value.link"
-        target="_blank"
-        data-test="channel-link"
-      >
-        {{ props.value.link }}
-      </a>
       <p
-        v-if="props.value?.description"
-        class=""
-        data-test="channel-description"
+        v-if="props.value?.itunes.author"
+        data-test="channel-author"
+        class="text-3xl"
       >
-        {{ props.value.description }}
+        {{ props.value?.itunes.author }}
       </p>
+
+      <div>
+        <p
+          v-for="(p, index) in props.value?.description.split('\n')"
+          :key="index"
+          class=""
+          data-test="channel-description"
+        >
+          {{ p }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { Except } from 'type-fest';
 import type { PodcastChannel } from '/@/type/channel';
 
-type ChannelIntro = Partial<
-  Pick<PodcastChannel, 'description' | 'image' | 'title' | 'link'>
-> & { author?: string };
+type ChannelIntro = Except<PodcastChannel, 'items'>;
 
 const props = defineProps<{ value?: ChannelIntro }>();
 </script>
