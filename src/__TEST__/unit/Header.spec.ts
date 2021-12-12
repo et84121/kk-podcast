@@ -13,10 +13,10 @@ describe('Header.vue', () => {
     injectRouterMock(router);
   });
 
-  it('有一個 h1 元素', async () => {
+  it('has on h1 tag', async () => {
     const wrapper = mount(HeaderVue);
     const headerElement = wrapper.get('[data-test="header"]');
-    expect(headerElement.html()).toContain('</h1>');
+    expect(headerElement.find('h1').exists()).toBeTruthy();
   });
 
   it('has route', async () => {
