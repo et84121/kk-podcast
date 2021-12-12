@@ -10,8 +10,9 @@ export const routes: Routes = [
   },
   {
     name: 'episode',
-    path: '/episode',
+    path: '/episode/:guid',
     component: () => import('/@/pages/Episode/Episode.vue'),
+    props: true,
   },
 ];
 
