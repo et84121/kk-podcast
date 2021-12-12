@@ -10,11 +10,14 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
 import ChannelIntro from './ChannelIntro.vue';
 import EpisodeCard from './EpisodeCard.vue';
 import { usePodcastChannelStore } from '/@/store/podcastChannelStore';
 
 const podcastChannelStore = usePodcastChannelStore();
 
-const Episodes = podcastChannelStore.channel?.items;
+const Episodes = computed(() => {
+  return podcastChannelStore.channel?.items;
+});
 </script>
