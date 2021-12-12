@@ -3,7 +3,7 @@ import { describe, expect, beforeEach, it } from '@jest/globals';
 import { mount } from '@vue/test-utils';
 import { routes } from '/@/router';
 import EpisodeCardVue from '/@/pages/Home/EpisodeCard.vue';
-import { useComponentMock } from './utils';
+import { useComponentMock } from '../../util/utils';
 
 describe('Header.vue', () => {
   const router = createRouterMock({
