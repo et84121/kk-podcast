@@ -11,7 +11,7 @@
       hover:shadow-lg
     "
     data-test="episode-card"
-    @click="router.push({ name: 'episode' })"
+    @click="routeToEpisodePage()"
   >
     <!-- ep. image -->
     <div
@@ -25,22 +25,42 @@
         rounded-2xl
       "
     >
-      <img />
-      <p>沒有圖片</p>
+      <img
+        v-if="props.value?.itunes"
+        class="w-25 h-25 object-center object-cover"
+        :scr="props.value.itunes.image"
+      />
+      <p v-else>沒有圖片</p>
     </div>
 
     <!-- ep. meta info -->
-
     <div class="flex flex-col items-start justify-end">
-      <h2 class="text-lg font-bold">ep. name</h2>
-      <p class="text-sm">ep. date</p>
-      <p class="text-sm">ep. duration</p>
-      <p class="text-sm">ep. description</p>
+      <h2 class="text-lg font-bold">{{ props.value?.title }}</h2>
+      <p class="text-sm">{{ props.value?.isoDate }}</p>
+      <p class="text-sm">{{ props.value?.enclosure?.length }}</p>
+      <p class="text-sm">{{ props.value?.contentSnippet }}</p>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
+import type { PodcastChannel } from '/@/type/channel';
+import type { SetRequired } from 'type-fest';
 const router = useRouter();
+
+type Episode = SetRequired<
+  Partial<PodcastChannel['items'][number]>,
+  'guid' | 'title'
+>;
+
+const props = defineProps<{ value?: Episode }>();
+
+function routeToEpisodePage() {
+  if (!props.value) {
+    return;
+  }
+
+  router.push({ name: 'episode', params: { guid: props.value.guid } });
+}
 </script>

@@ -12,26 +12,56 @@
         rounded-lg
       "
     >
-      <img />
-      <p>沒有圖片</p>
+      <img
+        v-if="props.value?.image"
+        :src="props.value.image.link"
+        :alt="props.value.image.title"
+        class="object-center object-cover w-50 h-50"
+        data-test="channel-image"
+      />
+      <p v-else data-test="channel-image-fallback">沒有圖片</p>
     </div>
 
     <!-- channel meta info -->
-    <div class="flex flex-col justify-end items-start">
+    <div class="flex flex-col justify-end items-start py-2">
       <h2
         class="
           text-2xl
           font-bold
           underline underline-blue-400 underline-offset-2 underline-4
         "
+        data-test="channel-name"
       >
-        Channel Name
+        {{ props.value?.title || '無名頻道' }}
       </h2>
-      <p>Author</p>
-      <a href="#">Link</a>
-      <p class="">Channel Description</p>
+      <p v-if="props.value?.author" data-test="channel-author">
+        {{ props.value.author }}
+      </p>
+      <a
+        v-if="props.value?.link"
+        :href="props.value.link"
+        target="_blank"
+        data-test="channel-link"
+      >
+        {{ props.value.link }}
+      </a>
+      <p
+        v-if="props.value?.description"
+        class=""
+        data-test="channel-description"
+      >
+        {{ props.value.description }}
+      </p>
     </div>
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import type { PodcastChannel } from '/@/type/channel';
+
+type ChannelIntro = Partial<
+  Pick<PodcastChannel, 'description' | 'image' | 'title' | 'link'>
+> & { author?: string };
+
+const props = defineProps<{ value?: ChannelIntro }>();
+</script>
