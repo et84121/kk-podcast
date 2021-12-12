@@ -1,46 +1,14 @@
-import type { createApp, InjectionKey } from 'vue';
-import { Ref, toRaw } from 'vue';
-import { inject, ref, readonly, watch, reactive, toRef, nextTick } from 'vue';
+import { ref, readonly, watch, reactive, toRef } from 'vue';
 import { useMediaControls } from '@vueuse/core';
 import { usePodcastChannelStore } from '/@/store/podcastChannelStore';
 import type { PodcastChannel } from '/@/model/channel';
-
-type Plugin = Parameters<ReturnType<typeof createApp>['use']>['0'];
-
-function defindePlugin<T extends Plugin>(Plugin: T) {
-  return Plugin;
-}
-
-const instanceOfPodcastPlayer: InjectionKey<
-  ReturnType<typeof initPodcastPlayer>
-> = Symbol('instanceOfPodcastPlayer');
-
-/**
- * Podcast Player plugin
- */
-export const podcastPlayer = defindePlugin({
-  install: async (app, option) => {
-    const instance = initPodcastPlayer();
-    app.provide(instanceOfPodcastPlayer, instance);
-  },
-});
-
-export function usePodcastPlayer(): ReturnType<typeof initPodcastPlayer> {
-  const instance = inject(instanceOfPodcastPlayer);
-
-  if (!instance) {
-    throw new Error('Cannot get the instance of podcastPlayer');
-  }
-
-  return instance;
-}
 
 /**
  * Factory function for podcast player
  *
  * Rely on PodcastChannelStore to play podcast
  */
-function initPodcastPlayer() {
+export function initPodcastPlayer() {
   const PodcastStore = usePodcastChannelStore();
 
   if (!PodcastStore.channel) {

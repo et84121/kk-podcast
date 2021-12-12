@@ -16,7 +16,7 @@ import { createPinia } from 'pinia';
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
 
 // podcastPlayer
-import { podcastPlayer } from '/@/plugin/PodcastPlayer';
+import { podcastPlayerPlugin } from './plugin/PodcastPlayer';
 
 // vue-use motion
 import { MotionPlugin } from '@vueuse/motion';
@@ -27,7 +27,7 @@ app.use(createPinia().use(piniaPluginPersistedstate));
 
 app.use(Router);
 
-app.use(podcastPlayer);
+app.use(podcastPlayerPlugin);
 
 app.use(MotionPlugin);
 
