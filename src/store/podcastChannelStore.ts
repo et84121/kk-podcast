@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
-import Parser from 'rss-parser';
+import { useRssParser } from '../composable/useRssParser';
+
 import type { PodcastChannel } from '/@/type/channel';
 
 export const usePodcastChannelStore = defineStore('PodcastChannelStore', {
@@ -10,14 +11,16 @@ export const usePodcastChannelStore = defineStore('PodcastChannelStore', {
   }),
   actions: {
     async load() {
-      const parser = new Parser();
+      const url =
+        'https://api.soundon.fm/v2/podcasts/954689a5-3096-43a4-a80b-7810b219cef3/feed.xml';
 
-      const feedUrl =
-        'https://feeds.soundon.fm/podcasts/954689a5-3096-43a4-a80b-7810b219cef3.xml';
+      if (this.channel) {
+        return;
+      }
 
-      const feed = await parser.parseURL(feedUrl);
+      const feed = await useRssParser(url);
 
-      this.channel = feed as unknown as PodcastChannel;
+      this.channel = feed;
     },
   },
   persist: true,
