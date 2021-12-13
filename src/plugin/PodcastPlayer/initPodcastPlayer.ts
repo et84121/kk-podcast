@@ -68,7 +68,7 @@ export function initPodcastPlayer() {
       // when new episode index set
       else if (newIndex !== oldIndex) {
         // new index inbound
-        if (newIndex > 0 && newIndex < episodes.length) {
+        if (newIndex >= 0 && newIndex < episodes.length) {
           newEpisode = episodes[newIndex];
 
           episodeGuid.value = newEpisode.guid;
