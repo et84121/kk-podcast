@@ -7,7 +7,6 @@
 - [Vite](https://github.com/vitejs/vite) ⚡️, [Vue 3](https://github.com/vuejs/vue-next),
 - 💨 [Windi CSS](https://github.com/windicss/windicss)
 - 📦 [Components auto importing](./src/components)
-- [i18n](https://github.com/intlify/vue-i18n-next) out of the box 👩‍🎨
 - Easy to use svg icons based on [Iconify](https://iconify.design) 🔝
 - Routing with [Vue Router 4](https://github.com/vuejs/vue-router-next)
 - Deploy on Netlify
@@ -30,7 +29,6 @@ This repo brings few things pre-packed, so you don't need to install them manual
 ### Plugins
 
 - [VueUse](https://github.com/vueuse/vueuse) - collection of useful composition APIs
-- [Vue I18n](https://github.com/intlify/vue-i18n-next) - Internationalization
 - Component auto-import with [`vite-plugin-components`](https://github.com/antfu/vite-plugin-components)
 
 ### Dev tools
