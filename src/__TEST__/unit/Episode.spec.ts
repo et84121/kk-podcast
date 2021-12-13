@@ -1,17 +1,15 @@
-import { describe, expect, beforeEach, it, test, jest } from '@jest/globals';
+import { describe, expect, beforeEach, it, jest } from '@jest/globals';
 import { mount } from '@vue/test-utils';
 import { createRouterMock, injectRouterMock } from 'vue-router-mock';
 import { routes } from '/@/router';
 import { createTestingPinia } from '@pinia/testing';
 import EpisodeVue from '/@/pages/Episode/Episode.vue';
 import { usePodcastChannelStore } from '/@/store/podcastChannelStore';
-import { episodeFactory, podcastChannelFactory } from './mockDataFactory';
+import { episodeFactory, podcastChannelFactory } from './mock/mockDataFactory';
 import { podcastPlayerPlugin, usePodcastPlayer } from '/@/plugin/PodcastPlayer';
-import { RouterLink } from 'vue-router';
+import { nextTick } from 'vue';
 
 function factory() {
-  jest.mock('/@/plugin/PodcastPlayer');
-
   const motionSlideBottom = jest.fn();
 
   const episodes = episodeFactory.batchSync(3);
@@ -22,7 +20,6 @@ function factory() {
     props: { guid: episodes[0].guid },
     global: {
       plugins: [createTestingPinia(), podcastPlayerPlugin],
-      components: { 'router-link': RouterLink },
       directives: {
         'motion-slide-bottom': motionSlideBottom,
       },
@@ -36,6 +33,9 @@ function factory() {
   });
 
   const podcastPlayer = usePodcastPlayer();
+
+  podcastPlayer.play = jest.fn();
+  // jest.spyOn(podcastPlayer, 'play');
 
   return {
     wrapper,
@@ -56,18 +56,53 @@ describe('Episode.vue', () => {
     injectRouterMock(router);
   });
 
-  it('image', async () => {
+  it('has right episode image', async () => {
     const { wrapper, episode } = factory();
 
-    expect(
-      wrapper.find("[data-test='episode-image']").find('img').attributes('src'),
-    ).toBe(episode.itunes.image);
+    const imgBlock = wrapper.find("[data-test='episode-image']");
+
+    expect(imgBlock.exists()).toBeTruthy();
+
+    // waiting computed properties change
+    await nextTick();
+
+    const img = imgBlock.find('img');
+
+    expect(img.exists()).toBeTruthy();
+
+    expect(img.attributes('src')).toBe(episode.itunes.image);
   });
 
-  it('episode-play', async () => {
+  it('route to home page after clicking image', async () => {
+    const { wrapper } = factory();
+
+    const img = wrapper.find("[data-test='episode-image']");
+
+    expect(img.exists()).toBeTruthy();
+
+    await img.trigger('click');
+
+    expect(wrapper.vm.$router.push).toBeCalledWith({ name: 'home' });
+  });
+
+  it('route to home page after clicking 查看全部集數', async () => {
+    const { wrapper } = factory();
+
+    const img = wrapper.find("[data-test='episode-go-home']");
+
+    expect(img.exists()).toBeTruthy();
+
+    await img.trigger('click');
+
+    expect(wrapper.vm.$router.push).toBeCalledWith({ name: 'home' });
+  });
+
+  it('should trigger podcastPlayer play() after clicking episode play button', async () => {
     const { wrapper, episode, podcastPlayer } = factory();
 
     const playButton = wrapper.find("[data-test='episode-play']");
+
+    expect(playButton.exists()).toBeTruthy();
 
     await playButton.trigger('click');
 

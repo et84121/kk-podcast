@@ -1,6 +1,6 @@
 import { describe, expect, beforeEach, it, test } from '@jest/globals';
 import { mount } from '@vue/test-utils';
-import { podcastChannelFactory } from './mockDataFactory';
+import { podcastChannelFactory } from './mock/mockDataFactory';
 import ChannelIntroVue from '/@/pages/Home/ChannelIntro.vue';
 import { useComponentMock } from '/@/util/utils';
 

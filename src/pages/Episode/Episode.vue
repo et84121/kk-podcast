@@ -12,15 +12,14 @@
         <div
           class="w-3/5 min-w-30 lg:(w-2/5 min-h-100) flex flex-row justify-center items-center shadow-lg rounded-lg"
           data-test="episode-image"
+          @click="router.push({ name: 'home' })"
         >
-          <router-link :to="{ name: 'home' }">
-            <img
-              v-if="episode?.itunes.image"
-              :src="episode?.itunes.image"
-              class="rounded-lg"
-            />
-            <p v-else>沒有圖片</p>
-          </router-link>
+          <img
+            v-if="episode?.itunes.image"
+            :src="episode?.itunes.image"
+            class="rounded-lg"
+          />
+          <p v-else>沒有圖片</p>
         </div>
 
         <!-- ep meta info -->
@@ -50,12 +49,13 @@
 
       <!--  button -->
       <div class="flex flex-col gap-4 justify-end">
-        <router-link
+        <button
           class="py-2 px-2 border-1 border-gray-200"
-          :to="{ name: 'home' }"
+          data-test="episode-go-home"
+          @click="router.push({ name: 'home' })"
         >
           查看全部集數
-        </router-link>
+        </button>
       </div>
     </div>
 
@@ -68,6 +68,7 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
 import { computed, toRef } from 'vue';
 import { usePodcastPlayer } from '/@/plugin/PodcastPlayer';
 import { usePodcastChannelStore } from '/@/store/podcastChannelStore';
@@ -75,6 +76,8 @@ import { format } from 'date-fns';
 import { zhTW } from 'date-fns/locale';
 
 const props = defineProps<{ guid: string }>();
+
+const router = useRouter();
 
 const podcastPlayer = usePodcastPlayer();
 
