@@ -24,7 +24,7 @@
       <h2 class="lg:text-2xl text-lg font-bold">
         {{ props.value?.title }}
       </h2>
-      <p class="text-sm">{{ pubDate }}</p>
+      <p class="text-sm" data-test="episode-card-pubDate">{{ pubDate }}</p>
     </div>
   </div>
 </template>
@@ -47,14 +47,9 @@ type Episode = SetRequired<
   'guid' | 'title'
 >;
 
-const props = defineProps<{ value?: Episode }>();
+const props = defineProps<{ value: Episode }>();
 
 function routeToEpisodePage() {
-  if (!props.value) {
-    console.error('no props value');
-    return;
-  }
-
   router.push({ name: 'episode', params: { guid: props.value.guid } });
 }
 
