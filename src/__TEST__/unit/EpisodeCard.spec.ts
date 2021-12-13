@@ -3,7 +3,7 @@ import { describe, expect, beforeEach, it, jest } from '@jest/globals';
 import { mount } from '@vue/test-utils';
 import { routes } from '/@/router';
 import EpisodeCardVue from '/@/pages/Home/EpisodeCard.vue';
-import { useComponentMock } from '/@/util/utils';
+import { useComponentMock } from './mock/utils';
 import { episodeFactory } from './mock/mockDataFactory';
 
 function factory() {
