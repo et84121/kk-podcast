@@ -91,7 +91,8 @@ export function initPodcastPlayer() {
 
       const newEpisodeUrl = newEpisode.enclosure.url;
 
-      audioElement.value.src = newEpisodeUrl;
+      if (audioElement.value.src != newEpisodeUrl)
+        audioElement.value.src = newEpisodeUrl;
     },
   );
 
