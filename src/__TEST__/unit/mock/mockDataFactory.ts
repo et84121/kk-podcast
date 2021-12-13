@@ -15,6 +15,7 @@ export const podcastChannelFactory = new TypeFactory<PodcastChannel>(i => ({
     value: faker.image.cats(),
   },
   itunes: {
+    image: faker.image.food(),
     author: faker.internet.userName(),
     explicit: faker.lorem.word(1),
     categories: () => [''],
