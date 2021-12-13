@@ -1,8 +1,16 @@
 <template>
-  <div v-if="visbility" v-motion-slide-bottom class="bottom-player">
+  <div
+    v-if="playerVisbility"
+    v-motion-slide-bottom
+    class="bottom-player"
+    data-test="bottom-player"
+  >
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range -->
     <div class="absolute top-2 right-0 left-0 w-full flex flex-row">
-      <p class="mx-2 whitespace-nowrap w-15 text-center">
+      <p
+        class="mx-2 whitespace-nowrap w-15 text-center"
+        data-test="soundplayer-current-time"
+      >
         {{ Math.round(currentTime) + '秒' || '0' }}
       </p>
       <input
@@ -43,7 +51,7 @@
           class="playerButton"
           data-test="soundplayer-controller-pause"
           :disabled="!playable"
-          @click="pause()"
+          @click="podcastPlayer.pause()"
         >
           <span
             class="iconify-inline"
@@ -58,7 +66,7 @@
           class="playerButton"
           data-test="soundplayer-controller-play"
           :disabled="!playable"
-          @click="play()"
+          @click="podcastPlayer.play()"
         >
           <span
             class="iconify-inline"
@@ -74,24 +82,22 @@
 
 <script setup lang="ts">
 import { usePodcastPlayer } from '/@/plugin/PodcastPlayer';
-import { computed, ref, watch } from 'vue';
-import { formatDuration } from 'date-fns';
-import { zhTW } from 'date-fns/locale';
+import { computed, watch } from 'vue';
 
 const props = withDefaults(defineProps<{ visbility?: boolean }>(), {
-  visbility: true,
+  visbility: false,
 });
 
 const emit = defineEmits<{ (e: 'update:visbility', value: boolean): void }>();
 
-const visbility = computed({
+const playerVisbility = computed({
   get: () => props.visbility,
   set: val => emit('update:visbility', val),
 });
 
 const podcastPlayer = usePodcastPlayer();
 
-const { currentTime, duration, play, pause, status } = podcastPlayer;
+const { currentTime, duration, status } = podcastPlayer;
 
 const episode = podcastPlayer.EpisodeMeta;
 
@@ -102,8 +108,8 @@ const playable = computed(() => {
 watch(
   playable,
   newVal => {
-    if (newVal) visbility.value = true;
-    else visbility.value = false;
+    if (newVal) playerVisbility.value = true;
+    else playerVisbility.value = false;
   },
   { immediate: true },
 );
