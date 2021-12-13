@@ -10,7 +10,7 @@
       >
         <!-- ep image -->
         <div
-          class="w-3/5 min-w-30 lg:(w-2/5 min-h-100) flex flex-row justify-center items-center shadow-lg rounded-lg"
+          class="w-full sm:w-3/5 min-w-30 lg:(w-2/5 min-h-100) flex flex-row justify-center items-center shadow-lg rounded-lg"
           data-test="episode-image"
           @click="router.push({ name: 'home' })"
         >
@@ -24,7 +24,7 @@
 
         <!-- ep meta info -->
         <div
-          class="flex flex-row flex-wrap justify-center items-end pb-4 gap-8"
+          class="flex flex-col justify-center items-center sm:(flex-row flex-wrap justify-center items-end) pb-4 gap-8"
           data-test="episode-meta"
         >
           <div class="flex flex-col">
