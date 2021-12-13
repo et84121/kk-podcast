@@ -1,13 +1,14 @@
 import type { InjectionKey } from 'vue';
-import { inject } from 'vue';
 import { getActivePodcastPlayer } from '.';
 import type { instanceOfPodcastPlayer } from './podcastPlayerPlugin';
 
-type returnType = typeof instanceOfPodcastPlayer extends InjectionKey<infer R>
+type PodcastPlayer = typeof instanceOfPodcastPlayer extends InjectionKey<
+  infer R
+>
   ? R
   : never;
 
-export function usePodcastPlayer(): returnType {
+export function usePodcastPlayer(): PodcastPlayer {
   const instance = getActivePodcastPlayer();
 
   if (!instance) {
