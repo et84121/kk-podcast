@@ -4,7 +4,7 @@
     <router-view />
   </div>
 
-  <BottomPlayer v-model:player-visbility="playerVisbility"></BottomPlayer>
+  <BottomPlayer v-model:visbility="playerVisbility"></BottomPlayer>
 </template>
 
 <script lang="ts" setup>

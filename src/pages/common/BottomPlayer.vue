@@ -85,7 +85,7 @@ import { usePodcastPlayer } from '/@/plugin/PodcastPlayer';
 import { computed, watch } from 'vue';
 
 const props = withDefaults(defineProps<{ visbility?: boolean }>(), {
-  visbility: false,
+  visbility: true,
 });
 
 const emit = defineEmits<{ (e: 'update:visbility', value: boolean): void }>();
