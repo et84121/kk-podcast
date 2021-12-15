@@ -1,13 +1,12 @@
 import { describe, expect, beforeEach, it, jest } from '@jest/globals';
 import { mount } from '@vue/test-utils';
-
 import { usePodcastChannelStore } from '/@/store/podcastChannelStore';
 import { episodeFactory, podcastChannelFactory } from './mock/mockDataFactory';
 import {
   createTestingPodcastPlayer,
   usePodcastPlayer,
 } from '/@/plugin/PodcastPlayer';
-import { createRouterMock, getRouter, injectRouterMock } from 'vue-router-mock';
+import { createRouterMock, injectRouterMock } from 'vue-router-mock';
 import { routes } from '/@/router';
 import { createTestingPinia } from '@pinia/testing';
 import { nextTick } from 'vue';
@@ -26,6 +25,7 @@ function factory() {
 
   // component wrapper
   const wrapper = mount(BottomPlayerVue, {
+    props: { visbility: true },
     global: {
       plugins: [createTestingPinia(), createTestingPodcastPlayer()],
       directives: {
@@ -82,7 +82,7 @@ describe('BottomPlayer.vue', () => {
     expect(bottomPlayer.exists()).toBeTruthy();
   });
 
-  it('update:visbility event test', async () => {
+  it('should have update:visbility event when podcastPlayer is playing', async () => {
     const { wrapper, episode, podcastPlayer, store } = factory();
 
     // make podcastPlayer play specify episode
@@ -94,43 +94,108 @@ describe('BottomPlayer.vue', () => {
     expect(wrapper.emitted()['update:visbility'][1]).toEqual([true]);
   });
 
-  it('stop state while podcastPlay is not playing any episode', async () => {
-    const { wrapper, episode, podcastPlayer, store } = factory();
+  describe('stop state', () => {
+    // it('snapshot test', async () => {
+    //   const { wrapper } = factory();
 
-    wrapper.setProps({ visbility: true });
+    //   expect(wrapper.html()).toMatchSnapshot('stop state');
+    // });
 
-    await nextTick();
+    it('should have 請選擇集數', async () => {
+      const { wrapper, episode, podcastPlayer, store } = factory();
 
-    expect(wrapper.html()).toContain('請選擇集數');
+      expect(wrapper.html()).toContain('請選擇集數');
+    });
 
-    let playButton = wrapper.find('[data-test="soundplayer-controller-play"]');
+    it('should have play Button and it should has disabled attribute', async () => {
+      const { wrapper, episode, podcastPlayer, store } = factory();
 
-    expect(playButton.exists()).toBeTruthy();
+      const playButton = wrapper.find(
+        '[data-test="soundplayer-controller-play"]',
+      );
 
-    expect(playButton.attributes('disabled')).toEqual('');
+      expect(playButton.exists()).toBeTruthy();
 
-    // make podcastPlayer play specify episode
-    podcastPlayer.play(episode.guid);
-    podcastPlayer.pause();
-
-    await nextTick();
-
-    playButton = wrapper.find('[data-test="soundplayer-controller-play"]');
-
-    await playButton.trigger('click');
-
-    expect(playButton.attributes('disabled')).toBeUndefined();
-
-    expect(podcastPlayer.play).toBeCalledTimes(2);
+      expect(playButton.attributes('disabled')).toEqual('');
+    });
   });
 
-  describe('playing state while podcastPlay is playing a episode', () => {
-    it('info block', async () => {
+  describe('pause state', () => {
+    // it('snapshot test', async () => {
+    //   const { wrapper, episode, podcastPlayer, store } = factory();
+
+    //   // make podcastPlayer play specify episode
+    //   podcastPlayer.play(episode.guid);
+    //   podcastPlayer.pause();
+
+    //   await nextTick();
+
+    //   expect(wrapper.html()).toMatchSnapshot('pause state');
+    // });
+
+    it('should have episode title', async () => {
+      const { wrapper, episode, podcastPlayer, store } = factory();
+
+      // make podcastPlayer play specify episode
+      podcastPlayer.play(episode.guid);
+      podcastPlayer.pause();
+
+      await nextTick();
+
+      expect(wrapper.html()).toContain(episode.title);
+    });
+
+    it('should have a play button and it shoud not have disabled attribute', async () => {
+      const { wrapper, episode, podcastPlayer, store } = factory();
+
+      // make podcastPlayer play specify episode
+      podcastPlayer.play(episode.guid);
+      podcastPlayer.pause();
+
+      await nextTick();
+
+      const playButton = wrapper.find(
+        '[data-test="soundplayer-controller-play"]',
+      );
+
+      expect(playButton.exists()).toBeTruthy();
+      expect(playButton.attributes('disabled')).toBeUndefined();
+    });
+
+    it('play button should trigger podcastPlayer.play() after clicking it', async () => {
+      const { wrapper, episode, podcastPlayer, store } = factory();
+
+      // make podcastPlayer play specify episode
+      podcastPlayer.play(episode.guid);
+      podcastPlayer.pause();
+
+      await nextTick();
+
+      const playButton = wrapper.find(
+        '[data-test="soundplayer-controller-play"]',
+      );
+
+      await playButton.trigger('click');
+
+      expect(podcastPlayer.play).toBeCalledTimes(2);
+    });
+  });
+
+  describe('playing state while podcastPlayer is playing a episode', () => {
+    // it('snapshot test', async () => {
+    //   const { wrapper, episode, podcastPlayer, store } = factory();
+
+    //   podcastPlayer.play(episode.guid);
+
+    //   await nextTick();
+
+    //   expect(wrapper.html()).toMatchSnapshot('playing state');
+    // });
+
+    it('should have a info block and it should route to episode page after clicking', async () => {
       const { wrapper, episode, podcastPlayer, store } = factory();
 
       podcastPlayer.play(episode.guid);
-
-      wrapper.setProps({ visbility: true });
 
       await nextTick();
 
@@ -141,12 +206,10 @@ describe('BottomPlayer.vue', () => {
       );
     });
 
-    it('pause button', async () => {
+    it('should have a pause button', async () => {
       const { wrapper, episode, podcastPlayer, store } = factory();
 
       podcastPlayer.play(episode.guid);
-
-      wrapper.setProps({ visbility: true });
 
       await nextTick();
 
@@ -169,8 +232,6 @@ describe('BottomPlayer.vue', () => {
       podcastPlayer.play(episode.guid);
 
       podcastPlayer.duration.value = 30;
-
-      wrapper.setProps({ visbility: true });
 
       await nextTick();
 
