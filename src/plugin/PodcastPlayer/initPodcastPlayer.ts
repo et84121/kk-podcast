@@ -3,13 +3,15 @@ import { useMediaControls } from '@vueuse/core';
 import { usePodcastChannelStore } from '/@/store/podcastChannelStore';
 import type { PodcastChannel } from '/@/model/channel';
 
+type PodcastChannelStore = ReturnType<typeof usePodcastChannelStore>;
+
 /**
  * Factory function for podcast player
  *
  * Rely on PodcastChannelStore to play podcast
  */
-export function initPodcastPlayer() {
-  const PodcastStore = usePodcastChannelStore();
+export function initPodcastPlayer(podcastChannelStore?: PodcastChannelStore) {
+  const PodcastStore = podcastChannelStore || usePodcastChannelStore();
 
   if (!PodcastStore.channel) {
     // 沒資料先載入一次試試
@@ -30,7 +32,7 @@ export function initPodcastPlayer() {
     { immediate: true, deep: true },
   );
 
-  const episodeIndex = ref(0);
+  const episodeIndex = ref<number>();
 
   const audioElement = ref(new Audio());
 
@@ -54,19 +56,22 @@ export function initPodcastPlayer() {
       let newEpisode: EpisodeMeta | undefined = undefined;
 
       // when new episode GUID set
-      if (newGuid !== oldGuid) {
+      if (newGuid != oldGuid) {
         const newEpisodeIndex = episodes.findIndex(e => e.guid === newGuid);
 
         if (newEpisodeIndex === -1) {
-          console.error('Cannot find the episode with new GUID');
-          return;
+          throw new Error('Cannot find the episode with new GUID');
         }
 
         episodeIndex.value = newEpisodeIndex;
         newEpisode = episodes[newEpisodeIndex];
       }
       // when new episode index set
-      else if (newIndex !== oldIndex) {
+      else if (newIndex != oldIndex) {
+        if (!newIndex) {
+          return;
+        }
+
         // new index inbound
         if (newIndex >= 0 && newIndex < episodes.length) {
           newEpisode = episodes[newIndex];
@@ -76,15 +81,13 @@ export function initPodcastPlayer() {
         // new index outbound
         else {
           // remain old value
-          console.error('new episode index is outbound');
           episodeIndex.value = oldIndex;
-          return;
+          throw new Error('new episode index is outbound');
         }
       }
 
       if (!newEpisode) {
-        console.error("Can't find new episode with newIndex or newGuid");
-        return;
+        throw new Error("Can't find new episode with newIndex or newGuid");
       }
 
       episodeMeta.value = newEpisode;
@@ -157,6 +160,10 @@ export function initPodcastPlayer() {
   }
 
   function next() {
+    if (!episodeIndex.value) {
+      return;
+    }
+
     const newIndex = episodeIndex.value + 1;
 
     if (newIndex >= episodes.length || newIndex < 0) {
@@ -167,6 +174,10 @@ export function initPodcastPlayer() {
   }
 
   function previous() {
+    if (!episodeIndex.value) {
+      return;
+    }
+
     const newIndex = episodeIndex.value - 1;
 
     if (newIndex >= episodes.length || newIndex < 0) {

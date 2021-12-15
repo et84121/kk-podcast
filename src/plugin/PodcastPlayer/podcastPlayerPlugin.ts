@@ -23,23 +23,26 @@ export const podcastPlayerPlugin = defindePlugin({
   },
 });
 
+type spyFn = unknown;
+
+type PodcastChannelStore = Parameters<typeof initPodcastPlayer>['0'];
+
 export const createTestingPodcastPlayer = (
-  spyOnFn?: (
-    fn?: (...args: unknown[]) => unknown,
-  ) => (...args: unknown[]) => unknown,
+  podcastChannelStore?: PodcastChannelStore,
+  spyFn?: spyFn,
 ) =>
   defindePlugin({
     install: (app, option) => {
-      const instance = initPodcastPlayer();
+      const instance = initPodcastPlayer(podcastChannelStore);
 
       const createSpy =
-        spyOnFn ||
+        spyFn ||
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
         (typeof jest !== 'undefined' && jest.spyOn);
 
       if (!createSpy) {
-        throw new Error('You must configure the `spyOnFn` option.');
+        throw new Error('You must configure the `spyFn` option.');
       }
 
       createSpy(instance, 'play');
