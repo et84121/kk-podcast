@@ -1,11 +1,12 @@
 import { getCurrentInstance, inject } from 'vue';
 import {
+  createTestingPodcastPlayer,
   instanceOfPodcastPlayer,
   podcastPlayerPlugin,
 } from './podcastPlayerPlugin';
 import { usePodcastPlayer } from './usePodcastPlayer';
 
-export { podcastPlayerPlugin, usePodcastPlayer };
+export { podcastPlayerPlugin, usePodcastPlayer, createTestingPodcastPlayer };
 
 type instancePodcastPlayer = ReturnType<typeof usePodcastPlayer>;
 

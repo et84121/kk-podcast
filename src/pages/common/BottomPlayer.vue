@@ -51,7 +51,7 @@
           class="playerButton"
           data-test="soundplayer-controller-pause"
           :disabled="!playable"
-          @click="podcastPlayer.pause()"
+          @click="pause()"
         >
           <span
             class="iconify-inline"
@@ -66,7 +66,7 @@
           class="playerButton"
           data-test="soundplayer-controller-play"
           :disabled="!playable"
-          @click="podcastPlayer.play()"
+          @click="play()"
         >
           <span
             class="iconify-inline"
@@ -97,7 +97,7 @@ const playerVisbility = computed({
 
 const podcastPlayer = usePodcastPlayer();
 
-const { currentTime, duration, status } = podcastPlayer;
+const { currentTime, duration, status, play, pause } = podcastPlayer;
 
 const episode = podcastPlayer.EpisodeMeta;
 

@@ -3,7 +3,10 @@ import { mount } from '@vue/test-utils';
 
 import { usePodcastChannelStore } from '/@/store/podcastChannelStore';
 import { episodeFactory, podcastChannelFactory } from './mock/mockDataFactory';
-import { podcastPlayerPlugin, usePodcastPlayer } from '/@/plugin/PodcastPlayer';
+import {
+  createTestingPodcastPlayer,
+  usePodcastPlayer,
+} from '/@/plugin/PodcastPlayer';
 import { createRouterMock, getRouter, injectRouterMock } from 'vue-router-mock';
 import { routes } from '/@/router';
 import { createTestingPinia } from '@pinia/testing';
@@ -24,7 +27,7 @@ function factory() {
   // component wrapper
   const wrapper = mount(BottomPlayerVue, {
     global: {
-      plugins: [createTestingPinia(), podcastPlayerPlugin],
+      plugins: [createTestingPinia(), createTestingPodcastPlayer()],
       directives: {
         'motion-slide-bottom': motionSlideBottom,
       },
@@ -44,10 +47,6 @@ function factory() {
 
   // podcastPlayer
   const podcastPlayer = usePodcastPlayer();
-
-  // spy on some podcastPlayer method
-  jest.spyOn(podcastPlayer, 'play');
-  jest.spyOn(podcastPlayer, 'pause');
 
   return { wrapper, episode, podcastPlayer, store };
 }
