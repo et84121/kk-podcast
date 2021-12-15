@@ -150,8 +150,9 @@ describe('BottomPlayer.vue', () => {
 
       // make podcastPlayer play specify episode
       podcastPlayer.play(episode.guid);
-      podcastPlayer.pause();
+      await nextTick();
 
+      podcastPlayer.pause();
       await nextTick();
 
       const playButton = wrapper.find(
@@ -167,8 +168,8 @@ describe('BottomPlayer.vue', () => {
 
       // make podcastPlayer play specify episode
       podcastPlayer.play(episode.guid);
+      await nextTick();
       podcastPlayer.pause();
-
       await nextTick();
 
       const playButton = wrapper.find(
