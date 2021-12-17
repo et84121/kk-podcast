@@ -2,7 +2,7 @@ import { TypeFactory } from 'interface-forge';
 import faker from 'faker';
 import type { PodcastChannel } from '/@/model/channel';
 
-faker.locale = 'zh_TW';
+// faker.locale = 'zh_TW';
 
 export const podcastChannelFactory = new TypeFactory<PodcastChannel>(i => ({
   title: faker.hacker.noun(),

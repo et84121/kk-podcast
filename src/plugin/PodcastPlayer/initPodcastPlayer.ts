@@ -45,7 +45,7 @@ export function initPodcastPlayer(podcastChannelStore?: PodcastChannelStore) {
   const autoNextEpisodeFlag = ref(true);
 
   audioElement.value.addEventListener('canplaythrough', () => {
-    if (autoNextEpisodeFlag.value) {
+    if (autoNextEpisodeFlag.value && controls.playing.value) {
       audioElement.value.play();
     }
   });
@@ -160,7 +160,7 @@ export function initPodcastPlayer(podcastChannelStore?: PodcastChannelStore) {
   }
 
   function next() {
-    if (!episodeIndex.value) {
+    if (episodeIndex.value == undefined) {
       return;
     }
 
@@ -174,7 +174,7 @@ export function initPodcastPlayer(podcastChannelStore?: PodcastChannelStore) {
   }
 
   function previous() {
-    if (!episodeIndex.value) {
+    if (episodeIndex.value == undefined) {
       return;
     }
 
