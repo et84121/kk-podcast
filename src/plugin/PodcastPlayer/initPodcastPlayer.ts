@@ -45,7 +45,7 @@ export function initPodcastPlayer(podcastChannelStore?: PodcastChannelStore) {
   const autoNextEpisodeFlag = ref(true);
 
   audioElement.value.addEventListener('canplaythrough', () => {
-    if (autoNextEpisodeFlag.value && controls.playing.value) {
+    if (autoNextEpisodeFlag.value) {
       audioElement.value.play();
     }
   });
