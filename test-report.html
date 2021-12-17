@@ -1,0 +1,232 @@
+<html><head><meta charset="utf-8"/><title>Test Report</title><style type="text/css">html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+body {
+  padding: 2rem 1rem;
+  font-size: 0.85rem;
+}
+#jesthtml-content {
+  margin: 0 auto;
+  max-width: 70rem;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+#title {
+  margin: 0;
+  flex-grow: 1;
+}
+#logo {
+  height: 4rem;
+}
+#timestamp {
+  color: #777;
+  margin-top: 0.5rem;
+}
+
+/** SUMMARY */
+#summary {
+  color: #333;
+  margin: 2rem 0;
+  display: flex;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#summary > div {
+  margin-right: 2rem;
+  background: #eee;
+  padding: 1rem;
+  min-width: 15rem;
+}
+#summary > div:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 720px) {
+  #summary {
+    flex-direction: column;
+  }
+  #summary > div {
+    margin-right: 0;
+    margin-top: 2rem;
+  }
+  #summary > div:first-child {
+    margin-top: 0;
+  }
+}
+
+.summary-total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.summary-passed {
+  color: #4f8a10;
+  border-left: 0.4rem solid #4f8a10;
+  padding-left: 0.5rem;
+}
+.summary-failed,
+.summary-obsolete-snapshots {
+  color: #d8000c;
+  border-left: 0.4rem solid #d8000c;
+  padding-left: 0.5rem;
+}
+.summary-pending {
+  color: #9f6000;
+  border-left: 0.4rem solid #9f6000;
+  padding-left: 0.5rem;
+}
+.summary-empty {
+  color: #999;
+  border-left: 0.4rem solid #999;
+}
+
+.test-result {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+.test-result:last-child {
+  border: 0;
+}
+.test-result.passed {
+  background-color: #dff2bf;
+  color: #4f8a10;
+}
+.test-result.failed {
+  background-color: #ffbaba;
+  color: #d8000c;
+}
+.test-result.pending {
+  background-color: #ffdf61;
+  color: #9f6000;
+}
+
+.test-info {
+  display: flex;
+  justify-content: space-between;
+}
+.test-suitename {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+  word-break: break-word;
+}
+.test-title {
+  width: 40%;
+  text-align: left;
+  font-style: italic;
+}
+.test-status {
+  width: 20%;
+  text-align: right;
+}
+.test-duration {
+  width: 10%;
+  text-align: right;
+  font-size: 0.75rem;
+}
+
+.failureMessages {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-top: 1px dashed #d8000c;
+}
+.failureMessages.suiteFailure {
+  border-top: none;
+}
+.failureMsg {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.suite-container {
+  margin-bottom: 2rem;
+}
+.suite-info {
+  padding: 1rem;
+  background-color: #eee;
+  color: #777;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.suite-info .suite-path {
+  word-break: break-all;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+.suite-info .suite-time {
+  margin-left: 0.5rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.75rem;
+}
+.suite-info .suite-time.warn {
+  background-color: #d8000c;
+  color: #fff;
+}
+
+/* CONSOLE LOGS */
+.suite-consolelog {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: #efefef;
+}
+.suite-consolelog-header {
+  font-weight: bold;
+}
+.suite-consolelog-item {
+  padding: 0.5rem;
+}
+.suite-consolelog-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-consolelog-item-origin {
+  color: #777;
+  font-weight: bold;
+}
+.suite-consolelog-item-message {
+  color: #000;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* OBSOLETE SNAPSHOTS */
+.suite-obsolete-snapshots {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: #ffbaba;
+  color: #d8000c;
+}
+.suite-obsolete-snapshots-header {
+  font-weight: bold;
+}
+.suite-obsolete-snapshots-item {
+  padding: 0.5rem;
+}
+.suite-obsolete-snapshots-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-obsolete-snapshots-item-message {
+  color: #000;
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+</style></head><body><div id="jesthtml-content"><header><h1 id="title">Test Report</h1></header><div id="metadata-container"><div id="timestamp">Started: 2021-12-17 13:12:18</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (8)</div><div class="summary-passed">8 passed</div><div class="summary-failed summary-empty">0 failed</div><div class="summary-pending summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (41)</div><div class="summary-passed">41 passed</div><div class="summary-failed summary-empty">0 failed</div><div class="summary-pending summary-empty">0 pending</div></div></div></div><div id="suite-1" class="suite-container"><div class="suite-info"><div class="suite-path">C:\workeara\code\kk-podcast\src\__TEST__\unit\useRssParser.spec.ts</div><div class="suite-time warn">6.586s</div></div><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">useRssParser.ts</div><div class="test-title">test with snapshot and model vaildation</div><div class="test-status">passed</div><div class="test-duration">0.514s</div></div></div></div></div><div id="suite-2" class="suite-container"><div class="suite-info"><div class="suite-path">C:\workeara\code\kk-podcast\src\__TEST__\unit\Header.spec.ts</div><div class="suite-time warn">6.575s</div></div><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Header.vue</div><div class="test-title">has on h1 tag</div><div class="test-status">passed</div><div class="test-duration">0.034s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Header.vue</div><div class="test-title">has route</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Header.vue</div><div class="test-title">routing to home page after clicking element</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div></div></div><div id="suite-3" class="suite-container"><div class="suite-info"><div class="suite-path">C:\workeara\code\kk-podcast\src\__TEST__\unit\ChannelIntro.spec.ts</div><div class="suite-time warn">9.222s</div></div><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">ChannelIntro.vue</div><div class="test-title">when pass normal props, should have all element. [image,title,author,description]</div><div class="test-status">passed</div><div class="test-duration">0.053s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">ChannelIntro.vue</div><div class="test-title">pass empty props</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div></div></div><div id="suite-4" class="suite-container"><div class="suite-info"><div class="suite-path">C:\workeara\code\kk-podcast\src\plugin\PodcastPlayer\__TEST__\PodcastPlayerPlugin.spec.ts</div><div class="suite-time warn">9.462s</div></div><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; stop state </div><div class="test-title">player.state check</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; stop state </div><div class="test-title">player.EpisodeGuid should be undefined</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; stop state </div><div class="test-title">player.EpisodeMeta should be undefined</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; playing first episode</div><div class="test-title">should have right episode meta &amp;&amp; guid</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; playing first episode</div><div class="test-title">should have right src</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; playing first episode</div><div class="test-title">should trigger audioEl.play()</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; playing first episode</div><div class="test-title">status.playing should true</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; playing first episode</div><div class="test-title">player.currentTime</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; should play next episode at ended event</div><div class="test-title">should have next episode meta &amp;&amp; guid</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; should play next episode at ended event</div><div class="test-title">should have next episode src</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; should play next episode at ended event</div><div class="test-title">should trigger audioEl.play() after canplaythrough event</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; should stop playing if have no next episode</div><div class="test-title">should have current episode meta &amp;&amp; guid</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">PodcastPlayer Plugin &gt; should stop playing if have no next episode</div><div class="test-title">should have next episode src</div><div class="test-status">passed</div><div class="test-duration">0s</div></div></div></div></div><div id="suite-5" class="suite-container"><div class="suite-info"><div class="suite-path">C:\workeara\code\kk-podcast\src\__TEST__\unit\BottomPlayer.spec.ts</div><div class="suite-time warn">9.69s</div></div><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">BottomPlayer.vue</div><div class="test-title">Player visbility test</div><div class="test-status">passed</div><div class="test-duration">0.066s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BottomPlayer.vue</div><div class="test-title">should have update:visbility event when podcastPlayer is playing</div><div class="test-status">passed</div><div class="test-duration">0.035s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BottomPlayer.vue &gt; stop state</div><div class="test-title">should have 請選擇集數</div><div class="test-status">passed</div><div class="test-duration">0.022s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BottomPlayer.vue &gt; stop state</div><div class="test-title">should have play Button and it should has disabled attribute</div><div class="test-status">passed</div><div class="test-duration">0.013s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BottomPlayer.vue &gt; pause state</div><div class="test-title">should have episode title</div><div class="test-status">passed</div><div class="test-duration">0.017s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BottomPlayer.vue &gt; pause state</div><div class="test-title">should have a play button and it shoud not have disabled attribute</div><div class="test-status">passed</div><div class="test-duration">0.017s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BottomPlayer.vue &gt; pause state</div><div class="test-title">play button should trigger podcastPlayer.play() after clicking it</div><div class="test-status">passed</div><div class="test-duration">0.033s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BottomPlayer.vue &gt; playing state while podcastPlayer is playing a episode</div><div class="test-title">should have a info block and it should route to episode page after clicking</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BottomPlayer.vue &gt; playing state while podcastPlayer is playing a episode</div><div class="test-title">should have a pause button</div><div class="test-status">passed</div><div class="test-duration">0.018s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">BottomPlayer.vue &gt; playing state while podcastPlayer is playing a episode</div><div class="test-title">time seeker</div><div class="test-status">passed</div><div class="test-duration">0.021s</div></div></div></div></div><div id="suite-6" class="suite-container"><div class="suite-info"><div class="suite-path">C:\workeara\code\kk-podcast\src\__TEST__\unit\Index.spec.ts</div><div class="suite-time warn">10.803s</div></div><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Index.vue</div><div class="test-title">has ChannelIntro</div><div class="test-status">passed</div><div class="test-duration">0.039s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Index.vue</div><div class="test-title">has correct number of Episode Card</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div></div></div><div id="suite-7" class="suite-container"><div class="suite-info"><div class="suite-path">C:\workeara\code\kk-podcast\src\__TEST__\unit\EpisodeCard.spec.ts</div><div class="suite-time warn">11.027s</div></div><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Header.vue</div><div class="test-title">has route</div><div class="test-status">passed</div><div class="test-duration">0.037s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Header.vue</div><div class="test-title">routing to episode page after clicking Card</div><div class="test-status">passed</div><div class="test-duration">0.013s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Header.vue</div><div class="test-title">no image</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Header.vue</div><div class="test-title">lazyload image</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Header.vue</div><div class="test-title">no pubDate</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Header.vue</div><div class="test-title">have pubDate</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div></div></div><div id="suite-8" class="suite-container"><div class="suite-info"><div class="suite-path">C:\workeara\code\kk-podcast\src\__TEST__\unit\Episode.spec.ts</div><div class="suite-time warn">11.214s</div></div><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Episode.vue</div><div class="test-title">has right episode image</div><div class="test-status">passed</div><div class="test-duration">0.061s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Episode.vue</div><div class="test-title">route to home page after clicking image</div><div class="test-status">passed</div><div class="test-duration">0.026s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Episode.vue</div><div class="test-title">route to home page after clicking 查看全部集數</div><div class="test-status">passed</div><div class="test-duration">0.015s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Episode.vue</div><div class="test-title">should trigger podcastPlayer play() after clicking episode play button</div><div class="test-status">passed</div><div class="test-duration">0.014s</div></div></div></div></div></div></body></html>

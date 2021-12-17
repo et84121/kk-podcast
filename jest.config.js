@@ -7,6 +7,16 @@ module.exports = {
     '^.+\\.vue$': '@vue/vue3-jest',
     '^.+\\js$': 'babel-jest',
   },
+  rootDir: 'src/',
   moduleFileExtensions: ['vue', 'js', 'json', 'jsx', 'ts', 'tsx', 'node'],
-  moduleNameMapper: { '^/@/(.*)$': '<rootDir>/src/$1' },
+  moduleNameMapper: { '^/@/(.*)$': '<rootDir>/$1' },
+  reporters: [
+    'default',
+    [
+      '../node_modules/jest-html-reporter',
+      {
+        pageTitle: 'Test Report',
+      },
+    ],
+  ],
 };
