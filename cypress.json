@@ -1,6 +1,5 @@
 {
   "component": {
-    "componentFolder": "src",
     "testFiles": "cypress/**/*.spec.{js,jsx,ts,tsx}"
   }
 }

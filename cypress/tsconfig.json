@@ -1,14 +1,10 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "noEmit": true,
     // be explicit about types included
     // to avoid clashing with Jest types
     "types": ["cypress"]
   },
-  "include": [
-    "../node_modules/cypress",
-    "./**/*.ts",
-    "integration/EpisodeCard.spec.js"
-  ]
+  "include": ["../node_modules/cypress", "./**/*.ts"]
 }

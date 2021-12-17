@@ -1,10 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { createRouterMock, injectRouterMock } from 'vue-router-mock';
-import { routes } from '/@/router';
-
-import EpisodeCardVue from '/@/pages/Home/EpisodeCard.vue';
-import { useComponentMock } from '/@/__TEST__/unit/mock/utils';
-import { episodeFactory } from '/@/__TEST__/unit/mock/mockDataFactory';
+import EpisodeCardVue from '../../src/pages/Home/EpisodeCard.vue';
+import { useComponentMock } from '../../src/__TEST__/unit/mock/utils';
+import { episodeFactory } from '../../src/__TEST__/unit/mock/mockDataFactory';
 
 import { mount } from '@cypress/vue';
 import { defineComponent } from 'vue';
